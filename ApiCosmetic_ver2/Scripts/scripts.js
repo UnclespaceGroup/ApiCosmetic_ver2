@@ -71,6 +71,8 @@ $(document).ready(() => {
         });
     });
 
+
+
     //$('#iso').on('click', function (e) {
     //    e.preventDefault();
     //    var files = document.getElementById('uploadFile').files;
@@ -292,13 +294,16 @@ $(document).ready(() => {
     });
     $('.brandModal_send').click(function () {
         const url = '/api/brand/' + changeBrandId;
-        let a = $('select#brand-country').val();
+
+        let fileName = downloadFile('brand-file');
+        console.log(fileName);
         $.ajax({
             type: 'PUT',
             url: url,
             data: {
                 Name: $('#brand-name').val(),
-                CountryId: 2
+                CountryId: $('select#brand-country').val(),
+                Image: fileName
             },
             beforeSend: (xhr) => {
                 let token = sessionStorage.getItem(tokenKey);
@@ -306,9 +311,9 @@ $(document).ready(() => {
             },
             dataType: 'json',
             success: (data) => {
-                console.log(data);
                 alert('Успешно Изменено');
-                location.reload();
+                downloadFile('brand-file');
+                // location.reload();
             },
             error: (e) => {
                 console.log(e);
@@ -316,4 +321,36 @@ $(document).ready(() => {
             }
         });
     });
+    downloadFile = (id) => {
+        // var files = document.getElementById('uploadFile').files;
+        var files = document.getElementById(id).files;
+        let fileName;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < 1; x++) {
+                    data.append("file" + x, files[x]);
+                    fileName = files[x].name;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/api/image',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (xhr, status, p3) {
+                        console.log(xhr);
+                        alert(xhr.responseText);
+                        fileName = null;
+                    }
+                });
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+        return fileName;
+    };
 });

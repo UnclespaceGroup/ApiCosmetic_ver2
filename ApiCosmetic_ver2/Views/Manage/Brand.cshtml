@@ -8,6 +8,7 @@
                 <tbody>
                     @foreach (Brand b in Model)
                     {
+                        string imagePath = "/Images/" + b.Image;
                         List<Country> countries;
                         string current;
                         if (ViewBag.country != null)
@@ -32,6 +33,7 @@
                             <td>@b.CountryId</td>
                             <td>@current</td>
                             <td>@b.Description</td>
+                            <td><div class="icon" style="background-image: url(@imagePath)" /></td>
                             <td>
                                 <button class="btn btn-default deleteBrand" data-id=@b.Id>Удалить</button>
                                 <button class="btn btn-success changeBrand" data-id=@b.Id data-toggle="modal" data-target="#brandModal">Изменить</button>
@@ -91,6 +93,9 @@
                         </select>
                     }
                 </div>
+            </div>
+            <div>
+                <input class="form-control-file" type="file" id="brand-file" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>

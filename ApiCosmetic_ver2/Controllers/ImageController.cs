@@ -23,11 +23,17 @@ namespace ApiCosmetic_ver2.Controllers
 
             // var type = file.Headers.ContentDisposition.type();
             string root = System.Web.HttpContext.Current.Server.MapPath("~/Images/");
+
             await Request.Content.ReadAsMultipartAsync(provider);
 
             foreach (var file in provider.Contents)
             {
                 var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
+                if (System.IO.File.Exists(root + filename))
+                {
+                    System.IO.File.Delete(root + filename);
+                }
+
                 byte[] fileArray = await file.ReadAsByteArrayAsync();
 
                 using (System.IO.FileStream fs = new System.IO.FileStream(root + filename, System.IO.FileMode.Create))

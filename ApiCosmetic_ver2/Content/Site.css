@@ -25,3 +25,9 @@ textarea {
 .table__disactive {
     background-color: rgba(0,0,0,0.3);
 }
+
+.icon {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+}

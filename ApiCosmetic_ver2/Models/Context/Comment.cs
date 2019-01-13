@@ -11,5 +11,7 @@ namespace ApiCosmetic_ver2.Models.Context
         public string Title { get; set; }
         public string Author { get; set; }
         public string Text { get; set; }
+        public string Date { get; set; }
+        public int ReviewId { get; set; }
     }
 }
