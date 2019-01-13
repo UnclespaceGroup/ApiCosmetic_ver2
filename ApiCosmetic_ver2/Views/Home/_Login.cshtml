@@ -1,0 +1,31 @@
+﻿<div>
+    <label>Введите email</label><br />
+    <input type="email" id="email" /> <br /><br />
+    <label>Введите пароль</label><br />
+    <input type="password" id="password" /><br /><br />
+    <label>Подтвердите пароль</label><br />
+    <input type="password" id="confirmpassword" /><br /><br />
+    <input type="submit" id="submit" value="Регистрация" />
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+<div class="userInfo" >
+    <p>Вы вошли как: @User.Identity.Name <span class="userName"></span></p>
+    <input type="button" value="Выйти" id="logOut" />
+</div>
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+<div class="loginForm">
+    <h3>Вход на сайт</h3>
+    <label>Введите email</label><br />
+    <input type="email" id="emailLogin" /> <br /><br />
+    <label>Введите пароль</label><br />
+    <input type="password" id="passwordLogin" /><br /><br />
+    <input type="submit" id="submitLogin" value="Логин" />
+</div>
+}
+
+

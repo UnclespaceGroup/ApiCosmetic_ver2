@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace ApiCosmetic_ver2.Controllers
 {
+   
     public class CountryController : ApiController
     {
         Context db = new Context();
@@ -21,16 +22,24 @@ namespace ApiCosmetic_ver2.Controllers
         {
             return "ok";
         }
+        [Authorize]
         public void Post([FromBody]Country value)
         {
             db.Countries.Add(value);
             db.SaveChanges();
         }
-
-        public void Put(int id, [FromBody]string value)
+        [Authorize]
+        public void Put(int id, [FromBody]Country value)
         {
+            var country = db.Countries.Find(id);
+            if (country != null && value != null)
+            {
+                if (value.Name != null) country.Name = value.Name;
+                if (value.Image != null) country.Image = value.Image;
+                db.SaveChanges();
+            }
         }
-
+        [Authorize]
         public void Delete(int id)
         {
             Country country = db.Countries.Find(id);

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ApiCosmetic_ver2.Controllers
 {
+    [Authorize]
     public class ManageController : Controller
     {
         Context db = new Context();
@@ -14,6 +15,10 @@ namespace ApiCosmetic_ver2.Controllers
         public ActionResult Index()
         {
             IEnumerable<Review> reviews = db.Reviews;
+            IEnumerable<Brand> brands = db.Brands.ToList();
+            ViewBag.brands = brands;
+            IEnumerable<Country> countries = db.Countries.ToList();
+            ViewBag.country = countries;
             return View(reviews);
         }
         public ActionResult Country()
@@ -23,6 +28,8 @@ namespace ApiCosmetic_ver2.Controllers
         }
         public ActionResult Brand()
         {
+            IEnumerable<Country> countries = db.Countries.ToList();
+            ViewBag.country = countries;
             IEnumerable<Brand> brands = db.Brands;
             return PartialView(brands);
         }

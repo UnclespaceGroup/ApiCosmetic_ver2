@@ -37,12 +37,18 @@ namespace ApiCosmetic_ver2.Controllers
             if (review != null)
             {
                 review.Active = review.Active ? false : true;
-                if (value.Title != null) review.Title = value.Title;
-                if (value.Text != null) review.Text = value.Text;
+                if (value != null)
+                {
+                    if (value.Title != null) review.Title = value.Title;
+                    if (value.Text != null) review.Text = value.Text;
+                    if (value.UserId != -1) review.UserId = value.UserId;
+                    if (value.BrandId != -1) review.BrandId = value.BrandId;
+                    if (value.CountryId != -1) review.CountryId = value.CountryId;
+                }
                 db.SaveChanges();
             }
         }
-
+        [Authorize]
         public void Delete(int id)
         {
             Review review = db.Reviews.Find(id);

@@ -10,7 +10,12 @@ namespace ApiCosmetic_ver2.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Cosmetic App";
+
+            return View();
+        }
+        public ActionResult Images()
+        {
 
             return View();
         }

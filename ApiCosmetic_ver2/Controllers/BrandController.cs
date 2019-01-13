@@ -25,17 +25,26 @@ namespace ApiCosmetic_ver2.Controllers
             var responce = Request.CreateResponse<Brand>(HttpStatusCode.OK, brand);
             return responce;
         }
-
+        [Authorize]
         public void Post([FromBody]Brand value)
         {
             db.Brands.Add(value);
             db.SaveChanges();
         }
-
-        public void Put(int id, [FromBody]string value)
+        [Authorize]
+        public void Put(int id, [FromBody]Brand value)
         {
+            var brand = db.Brands.Find(id);
+            if (brand != null && value != null)
+            {
+                if (value.Name!=null) brand.Name = value.Name;
+                if (value.Description != null) brand.Description = value.Description;
+                if (value.Image != null) brand.Image = value.Image;
+                if (value.CountryId != 0) brand.CountryId = value.CountryId;
+                db.SaveChanges();
+            }
         }
-
+        [Authorize]
         public void Delete(int id)
         {
             Brand brand = db.Brands.Find(id);

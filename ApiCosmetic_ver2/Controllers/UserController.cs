@@ -32,10 +32,17 @@ namespace ApiCosmetic_ver2.Controllers
             db.SaveChanges();
         }
 
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]User value)
         {
+            var user = db.Users.Find(id);
+            if (user != null && value != null)
+            {
+                if (value.Name != null) user.Name = value.Name;
+                if (value.Avatar != null) user.Avatar = value.Avatar;
+                db.SaveChanges();
+            }
         }
-
+        [Authorize]
         public void Delete(int id)
         {
             User user = db.Users.Find(id);

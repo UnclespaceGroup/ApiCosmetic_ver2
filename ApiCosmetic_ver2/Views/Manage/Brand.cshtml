@@ -8,11 +8,34 @@
                 <tbody>
                     @foreach (Brand b in Model)
                     {
+                        List<Country> countries;
+                        string current;
+                        if (ViewBag.country != null)
+                        {
+                            countries = ViewBag.country;
+                            var _current = countries.Find(x => x.Id == b.CountryId);
+                            if (_current != null)
+                            {
+                                current = _current.Name;
+                            }
+                            else
+                            {
+                                current = "Другая";
+                            }
+                        }
+                        else
+                        {
+                            current = "Другая";
+                        }
                         <tr>
                             <td>@b.Name</td>
                             <td>@b.CountryId</td>
+                            <td>@current</td>
                             <td>@b.Description</td>
-                            <td><button class="btn btn-primary deleteBrand" data-id=@b.Id>Удалить</button></td>
+                            <td>
+                                <button class="btn btn-default deleteBrand" data-id=@b.Id>Удалить</button>
+                                <button class="btn btn-success changeBrand" data-id=@b.Id data-toggle="modal" data-target="#brandModal">Изменить</button>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -24,7 +47,54 @@
                 <div class="form-group">
                     <input class="form-control" id="brand" placeholder="Введите Бренд" />
                 </div>
+                <div class="form-group">
+                    @if (ViewBag.country != null)
+                    {
+                        <select class="form-control" id="brand-country" name="brand-country">
+                            <option value="0">Другая</option>
+                            @foreach (Country country in ViewBag.country)
+                            {
+                                <option value=@country.Id>@country.Name</option>
+                            }
+                        </select>
+                    }
+
+                </div>
                 <button class="btn btn-primary" id="addBrand">Добавить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="brandModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Изменить Бренд</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control" id="brand-name" placeholder="Название" />
+                </div>
+                <div>
+                    @if (ViewBag.country != null)
+                    {
+                        <select class="form-control" id="brand-country" name="brand-country">
+                            <option value="0">Другая</option>
+                            @foreach (Country country in ViewBag.country)
+                            {
+                                <option value=@country.Id>@country.Name</option>
+                            }
+                        </select>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                <button type="button" class="btn btn-primary brandModal_send">Изменить</button>
             </div>
         </div>
     </div>

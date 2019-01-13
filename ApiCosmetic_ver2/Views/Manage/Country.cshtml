@@ -9,11 +9,12 @@
                 <tbody>
                     @foreach (Country c in Model)
                     {
-                        <tr>
-                            <td>@c.Id</td>
-                            <td>@c.Name</td>
-                            <td><button class="btn btn-primary deleteCountry" data-id=@c.Id>Удалить</button></td>
-                        </tr>
+                    <tr>
+                        <td>@c.Id</td>
+                        <td>@c.Name</td>
+                        <td><button class="btn btn-default deleteCountry" data-id=@c.Id>Удалить</button>
+                        <button class="btn btn-success changeCountry" data-id=@c.Id data-toggle="modal" data-target="#countryModal">Изменить</button></td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -25,6 +26,28 @@
                     <input class="form-control" id="country" placeholder="Введите Страну" />
                 </div>
                 <button class="btn btn-primary" id="addCountry">Добавить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="countryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Изменить Страну</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control" id="country-name" placeholder="Название" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                <button type="button" class="btn btn-primary countryModal_send">Изменить</button>
             </div>
         </div>
     </div>

@@ -236,6 +236,7 @@
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Context\Brand.cs" />
+    <Compile Include="Models\Context\Comment.cs" />
     <Compile Include="Models\Context\Country.cs" />
     <Compile Include="Models\Context\Context.cs" />
     <Compile Include="Models\Context\Review.cs" />
@@ -265,6 +267,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\aseREBl_QI0.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -301,6 +304,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\scripts.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -318,6 +322,7 @@
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\Country.cshtml" />
     <Content Include="Views\Manage\Brand.cshtml" />
+    <Content Include="Views\Home\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
