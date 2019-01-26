@@ -1,5 +1,7 @@
 ﻿
 $(document).ready(() => {
+
+    // Вход и авторизация
     console.log(sessionStorage);
     $('#submit').click(function (e) {
         e.preventDefault();
@@ -16,6 +18,7 @@ $(document).ready(() => {
             data: JSON.stringify(data),
             success: function (data) {
                 alert("Регистрация пройдена");
+                location.reload();
             },
             error: function (data) {
                 alert("В процесе регистрации возникла ошибка");
@@ -41,8 +44,7 @@ $(document).ready(() => {
                 $('.loginForm').css('display', 'none');
                 // сохраняем в хранилище sessionStorage токен доступа
                 sessionStorage.setItem(tokenKey, data.access_token);
-                console.log(sessionStorage);
-                console.log(data.access_token);
+                location.reload();
             },
             error: function (data) {
                 alert('При логине возникла ошибка');
@@ -50,6 +52,7 @@ $(document).ready(() => {
         });
     });
 
+    // Выход
     $('#logOut').click(function (e) {
         e.preventDefault();
         // sessionStorage.removeItem(tokenKey);
@@ -63,6 +66,7 @@ $(document).ready(() => {
             success: () => {
                 sessionStorage.removeItem(tokenKey);
                 alert('Вы вышли');
+                location.reload();
             },
             error: (e) => {
                 console.log(e);
@@ -109,6 +113,10 @@ $(document).ready(() => {
         changeId = $(this).data('id');
         $('#current-title').val($('.title_' + changeId).text());
         $('#current-text').val($('.text_' + changeId).text());
+        $('#current-tags').val($('.tags_' + changeId).text());
+        $('#current-im1').attr('src', $('.image1_' + changeId).text());
+        $('#current-im2').attr('src', $('.image2_' + changeId).text());
+        $('#current-im3').attr('src', $('.image3_' + changeId).text());
     });
     $('.modifide_send').click(function () {
         const url = '/api/review/' + changeId;
@@ -116,7 +124,11 @@ $(document).ready(() => {
             title: $('#current-title').val(),
             text: $('#current-text').val(),
             countryId: $('select#current-country').val(),
-            brandId: $('select#current-brand').val()
+            brandId: $('select#current-brand').val(),
+            tags: $('#current-tags').val(),
+            image: ($('#current-im1').attr('class') === 'image-send image_enable') ? $('#current-im1').val() : 'none',
+            image2: ($('#current-im2').attr('class') === 'image-send image_enable') ? $('#current-im2').val() : 'none',
+            image3: ($('#current-im3').attr('class') === 'image-send image_enable') ? $('#current-im3').val() : 'none'
         };
         console.log(data);
         $.ajax({
@@ -126,13 +138,18 @@ $(document).ready(() => {
             dataType: 'json',
             success: (data) => {
                 alert('Изменено');
-                // location.reload();
+                location.reload();
             },
             error: (e) => {
                 console.log(e);
                 alert('Не удалось');
             }
         });
+    });
+    $('.image-send').click(function () {
+        let a = $(this).attr('class');
+        let cur = (a === 'image-send image_enable') ? 'image-send image_deleted' : 'image-send image_enable';
+        $(this).attr('class', cur);
     });
 
     // Сделать активным

@@ -9,7 +9,8 @@ namespace ApiCosmetic_ver2.Models.Context
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Author { get; set; }
+        public int AuthorId { get; set; }
+        public string Description { get; set; }
         public string Text { get; set; }
         public string Date { get; set; }
         public int ReviewId { get; set; }

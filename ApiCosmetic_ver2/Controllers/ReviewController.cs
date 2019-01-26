@@ -44,6 +44,10 @@ namespace ApiCosmetic_ver2.Controllers
                     if (value.UserId != -1) review.UserId = value.UserId;
                     if (value.BrandId != -1) review.BrandId = value.BrandId;
                     if (value.CountryId != -1) review.CountryId = value.CountryId;
+                    if (value.Tags != null) review.Tags = value.Tags;
+                    if (value.Image != null) review.Image = value.Image;
+                    if (value.Image2 != null) review.Image2 = value.Image2;
+                    if (value.Image3 != null) review.Image3 = value.Image3;
                 }
                 db.SaveChanges();
             }

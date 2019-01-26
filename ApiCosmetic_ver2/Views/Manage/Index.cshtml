@@ -17,22 +17,30 @@
                 string className = !r.Active ? "table__disactive" : "";
                 string active_id = "active_" + r.Id;
                 string classText = "text_" + r.Id;
+                string image1 = "image1_" + r.Id;
+                string image2 = "image2_" + r.Id;
+                string image3 = "image3_" + r.Id;
+                string tags = "tags_" + r.Id; 
                 string classTitle = "title_" + r.Id;
                 string curCountry = (countries.Find(x => x.Id == r.CountryId) != null) ? countries.Find(x => x.Id == r.CountryId).Name : "Другая";
                 string curBrand = (brands.Find(x => x.Id == r.BrandId) != null) ? brands.Find(x => x.Id == r.BrandId).Name : "Другой";
 
-                <tr class=@className>
-                    <td class=@classTitle>@r.Title</td>
-                    <td class=@classText>@r.Text</td>
-                    <td>@curCountry</td>
-                    <td>@curBrand</td>
-                    <td>
-                        <div>
-                            <button class="btn btn-primary setActive" data-id=@r.Id>Утвердить</button>
-                            <button class="btn btn-success modifide" data-id=@r.Id data-toggle="modal" data-target="#myModal">Изменить</button>
-                        </div>
-                    </td>
-                </tr>
+            <tr class=@className>
+                <td class=@classTitle>@r.Title</td>
+                <td class=@classText>@r.Text</td>
+                <td>@curCountry</td>
+                <td>@curBrand</td>
+                <td class=@tags>@r.Tags</td>
+                <td style="display: none" class=@image1>@r.Image</td>
+                <td style="display: none" class=@image2>@r.Image2</td>
+                <td style="display: none" class=@image3>@r.Image3</td>
+                <td>
+                    <div>
+                        <button class="btn btn-primary setActive" data-id=@r.Id>Утвердить</button>
+                        <button class="btn btn-success modifide" data-id=@r.Id data-toggle="modal" data-target="#myModal">Изменить</button>
+                    </div>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -79,6 +87,14 @@
                         }
                         <option value="0">Другая...</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id="current-tags" placeholder="#tag1 #tag2 #tag3" />
+                </div>
+                <div class="image">
+                    <img alt="none" id="current-im1" class="image-send image_enable" />
+                    <img alt="none" id="current-im2" class="image-send image_enable" />
+                    <img alt="none" id="current-im3" class="image-send image_enable" />
                 </div>
             </div>
             <div class="modal-footer">

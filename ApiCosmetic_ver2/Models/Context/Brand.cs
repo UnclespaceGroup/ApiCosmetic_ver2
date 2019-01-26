@@ -12,5 +12,6 @@ namespace ApiCosmetic_ver2.Models.Context
         public string Name { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        public string Text { get; set; }
     }
 }

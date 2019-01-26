@@ -9,7 +9,7 @@ namespace ApiCosmetic_ver2.Models.Context
 {
     public class Context: DbContext
     {
-        public Context(): base("DefaultConnection") { }
+        public Context(): base("Context") { }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<User> Users { get; set; }

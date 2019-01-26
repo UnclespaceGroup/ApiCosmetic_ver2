@@ -31,3 +31,9 @@ textarea {
     height: 30px;
     background-size: cover;
 }
+.image_enable{
+
+}
+.image_deleted{
+    opacity: 0.5
+}

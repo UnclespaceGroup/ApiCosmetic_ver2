@@ -23,5 +23,7 @@ namespace ApiCosmetic_ver2.Models.Context
 
         public int Rating { get; set; }
         public string Date { get; set; }
+
+        public string Tags { get; set; } 
     }
 }
