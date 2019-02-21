@@ -114,9 +114,9 @@ $(document).ready(() => {
         $('#current-title').val($('.title_' + changeId).text());
         $('#current-text').val($('.text_' + changeId).text());
         $('#current-tags').val($('.tags_' + changeId).text());
-        $('#current-im1').attr('src', $('.image1_' + changeId).text());
-        $('#current-im2').attr('src', $('.image2_' + changeId).text());
-        $('#current-im3').attr('src', $('.image3_' + changeId).text());
+        $('#current-im1').attr('src', '/Images/' + $('.image1_' + changeId).text());
+        $('#current-im2').attr('src', '/Images/' + $('.image2_' + changeId).text());
+        $('#current-im3').attr('src', '/Images/' + $('.image3_' + changeId).text());
     });
     $('.modifide_send').click(function () {
         const url = '/api/review/' + changeId;
@@ -126,6 +126,7 @@ $(document).ready(() => {
             countryId: $('select#current-country').val(),
             brandId: $('select#current-brand').val(),
             tags: $('#current-tags').val(),
+            UserId: '-1',
             image: ($('#current-im1').attr('class') === 'image-send image_enable') ? $('#current-im1').val() : 'none',
             image2: ($('#current-im2').attr('class') === 'image-send image_enable') ? $('#current-im2').val() : 'none',
             image3: ($('#current-im3').attr('class') === 'image-send image_enable') ? $('#current-im3').val() : 'none'
@@ -155,17 +156,50 @@ $(document).ready(() => {
     // Сделать активным
     $('.setActive').click(function () {
         const id = $(this).data('id');
-        const active = $('#active_' + id).val();
+        // const active = $('#active_' + id).val();
         const url = '/api/review/' + id;
         $.ajax({
             type: 'PUT',
             url: url,
             data: {
-
+                active: true,
+                UserId: '-1',
+                BrandId: '-1',
+                CountryId: '-1'
             },
             dataType: 'json',
             success: (data) => {
                 alert('Изменено');
+                location.reload();
+            },
+            error: (e) => {
+                console.log(e);
+                alert('Не удалось');
+            }
+        });
+    });
+    // Удалить
+    $('.delete').click(function () {
+        const id = $(this).data('id');
+        const url = '/api/review/' + id;
+
+        const yes = confirm('Удалить???????');
+
+        if (!yes) return;
+
+        $.ajax({
+            type: 'DELETE',
+            url: url,
+            data: {
+
+            },
+            beforeSend: (xhr) => {
+                let token = sessionStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            dataType: 'json',
+            success: (data) => {
+                alert('Удалено');
                 location.reload();
             },
             error: (e) => {
@@ -205,25 +239,25 @@ $(document).ready(() => {
     });
 
     // Удалить страну
-    $('.deleteCountry').click(function () {
-        let a = confirm('Лучше не удаляй. Измени что нибудь. Все связанные с ним отзывы утеряются');
-        if (a) {
-            const url = '/api/country';
-            const id = $(this).data('id');
-            $.ajax({
-                type: 'DELETE',
-                url: url + '/' + id,
-                success: () => {
-                    alert('Удалено');
-                    location.reload();
-                },
-                error: (e) => {
-                    alert('Ошибка');
-                    console.log(e);
-                }
-            });
-        }
-    });
+    //$('.deleteCountry').click(function () {
+    //    let a = confirm('Лучше не удаляй. Измени что нибудь. Все связанные с ним отзывы утеряются');
+    //    if (0) {
+    //        const url = '/api/country';
+    //        const id = $(this).data('id');
+    //        $.ajax({
+    //            type: 'DELETE',
+    //            url: url + '/' + id,
+    //            success: () => {
+    //                alert('Удалено');
+    //                location.reload();
+    //            },
+    //            error: (e) => {
+    //                alert('Ошибка');
+    //                console.log(e);
+    //            }
+    //        });
+    //    }
+    //});
     // Изменить Страну
     let changeCountryId;
     $('.changeCountry').click(function () {
@@ -284,25 +318,25 @@ $(document).ready(() => {
     });
 
     // Удалить бренд
-    $('.deleteBrand').click(function () {
-        let a = confirm('Лучше не удаляй. Измени что нибудь. Все связанные с ним отзывы утеряются');
-        if (a) {
-            const url = '/api/brand';
-            const id = $(this).data('id');
-            $.ajax({
-                type: 'DELETE',
-                url: url + '/' + id,
-                success: () => {
-                    alert('Удалено');
-                    location.reload();
-                },
-                error: (e) => {
-                    alert('Ошибка');
-                    console.log(e);
-                }
-            });
-        }
-    });
+    //$('.deleteBrand').click(function () {
+    //    let a = confirm('Лучше не удаляй. Измени что нибудь. Все связанные с ним отзывы утеряются');
+    //    if (a) {
+    //        const url = '/api/brand';
+    //        const id = $(this).data('id');
+    //        $.ajax({
+    //            type: 'DELETE',
+    //            url: url + '/' + id,
+    //            success: () => {
+    //                alert('Удалено');
+    //                location.reload();
+    //            },
+    //            error: (e) => {
+    //                alert('Ошибка');
+    //                console.log(e);
+    //            }
+    //        });
+    //    }
+    //});
 
     // Изменить Бренд
     let changeBrandId;
@@ -370,4 +404,29 @@ $(document).ready(() => {
         }
         return fileName;
     };
+
+    $('.delete-comment').click(function () {
+        let a = confirm('Удалить?');
+        if (a) {
+            const url = '/api/comment';
+            const id = $(this).data('id');
+            console.log(id);
+            $.ajax({
+                type: 'DELETE',
+                url: url + '/' + id,
+                beforeSend: (xhr) => {
+                    let token = sessionStorage.getItem(tokenKey);
+                    xhr.setRequestHeader("Authorization", "Bearer " + token);
+                },
+                success: () => {
+                    alert('Удалено');
+                    location.reload();
+                },
+                error: (e) => {
+                    alert('Ошибка');
+                    console.log(e);
+                }
+            });
+        }
+    });
 });

@@ -39,6 +39,7 @@ namespace ApiCosmetic_ver2.Controllers
             {
                 if (value.Name != null) user.Name = value.Name;
                 if (value.Avatar != null) user.Avatar = value.Avatar;
+                if (value.Favorites != null) user.Favorites = value.Favorites;
                 db.SaveChanges();
             }
         }

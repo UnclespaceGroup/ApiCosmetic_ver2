@@ -36,7 +36,6 @@ namespace ApiCosmetic_ver2.Controllers
             var review = db.Reviews.Find(id);
             if (review != null)
             {
-                review.Active = review.Active ? false : true;
                 if (value != null)
                 {
                     if (value.Title != null) review.Title = value.Title;
@@ -48,6 +47,7 @@ namespace ApiCosmetic_ver2.Controllers
                     if (value.Image != null) review.Image = value.Image;
                     if (value.Image2 != null) review.Image2 = value.Image2;
                     if (value.Image3 != null) review.Image3 = value.Image3;
+                    if (value.Active) review.Active = !review.Active;
                 }
                 db.SaveChanges();
             }

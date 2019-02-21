@@ -1,0 +1,24 @@
+﻿@using ApiCosmetic_ver2.Models.Context
+@model IEnumerable<User>
+@{
+    ViewBag.Title = "Пользователи";
+}
+
+<h2>Пользователи</h2>
+
+<div class="container">
+    <table class="table">
+        <tbody>
+            @foreach (User c in Model)
+            {
+            <tr>
+                <td>@c.Id</td>
+                <td>@c.Email</td>
+                <td>@c.FullName</td>
+                <td>@c.Token</td>>
+                <td>@c.Favorites</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

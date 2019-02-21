@@ -38,6 +38,7 @@
                     <div>
                         <button class="btn btn-primary setActive" data-id=@r.Id>Утвердить</button>
                         <button class="btn btn-success modifide" data-id=@r.Id data-toggle="modal" data-target="#myModal">Изменить</button>
+                        <button class="btn btn-danger delete" data-id=@r.Id >Удалить</button>
                     </div>
                 </td>
             </tr>
@@ -46,9 +47,6 @@
     </table>
 </div>
 
-
-@Html.Action("Country")
-@Html.Action("Brand")
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -92,9 +90,9 @@
                     <input class="form-control" id="current-tags" placeholder="#tag1 #tag2 #tag3" />
                 </div>
                 <div class="image">
-                    <img alt="none" id="current-im1" class="image-send image_enable" />
-                    <img alt="none" id="current-im2" class="image-send image_enable" />
-                    <img alt="none" id="current-im3" class="image-send image_enable" />
+                    <img alt="none" width="200" height="200" id="current-im1" class="image-send image_enable" />
+                    <img alt="none" width="200" height="200" id="current-im2" class="image-send image_enable" />
+                    <img alt="none" width="200" height="200" id="current-im3" class="image-send image_enable" />
                 </div>
             </div>
             <div class="modal-footer">

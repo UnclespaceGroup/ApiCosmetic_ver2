@@ -15,7 +15,8 @@ namespace ApiCosmetic_ver2.Controllers
 
         public HttpResponseMessage Get()
         {
-            var a = db.Countries;
+            List<Country> a = db.Countries.ToList();
+            a.Sort();
             return Request.CreateResponse(HttpStatusCode.OK, a);
         }
         public string Get(int id)

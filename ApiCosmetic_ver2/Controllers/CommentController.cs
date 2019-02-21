@@ -27,8 +27,11 @@ namespace ApiCosmetic_ver2.Controllers
 
         public void Post([FromBody]Comment value)
         {
-            db.Comments.Add(value);
-            db.SaveChanges();
+            if (value != null)
+            {
+                db.Comments.Add(value);
+                db.SaveChanges();
+            }
         }
 
         [Authorize]

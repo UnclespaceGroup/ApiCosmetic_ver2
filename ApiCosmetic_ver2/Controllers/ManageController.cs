@@ -19,6 +19,7 @@ namespace ApiCosmetic_ver2.Controllers
             ViewBag.brands = brands;
             IEnumerable<Country> countries = db.Countries.ToList();
             ViewBag.country = countries;
+            reviews.Reverse();
             return View(reviews);
         }
         public ActionResult Country()
@@ -32,6 +33,22 @@ namespace ApiCosmetic_ver2.Controllers
             ViewBag.country = countries;
             IEnumerable<Brand> brands = db.Brands;
             return PartialView(brands);
+        }
+        public ActionResult Comment()
+        {
+            IEnumerable<Comment> comments = db.Comments.ToList();
+            comments.Reverse();
+            return View(comments);
+        }
+        public ActionResult Users()
+        {
+            IEnumerable<User> users = db.Users.ToList();
+            users.Reverse();
+            return View(users);
+        }
+        public ActionResult AddSomething()
+        {
+            return View();
         }
         protected override void Dispose(bool disposing)
         {

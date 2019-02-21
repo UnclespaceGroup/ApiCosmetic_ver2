@@ -15,7 +15,9 @@ namespace ApiCosmetic_ver2.Controllers
 
         public HttpResponseMessage Get()
         {
-            var brands = db.Brands;
+            List<Brand> brands = db.Brands.ToList();
+            brands.Sort();
+
             return Request.CreateResponse<IEnumerable<Brand>>(HttpStatusCode.OK, brands);
         }
 

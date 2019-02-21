@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ApiCosmetic_ver2.Models.Context
 {
-    public class Brand
+    public class Brand: IComparable
     {
         public int Id { get; set; }
         public int CountryId { get; set; }
@@ -13,5 +13,14 @@ namespace ApiCosmetic_ver2.Models.Context
         public string Image { get; set; }
         public string Description { get; set; }
         public string Text { get; set; }
+
+        public int CompareTo(object o)
+        {
+            Brand b = o as Brand;
+            if (b != null)
+                return this.Name.CompareTo(b.Name);
+            else
+                throw new Exception("Никак сравнить");
+        }
     }
 }
